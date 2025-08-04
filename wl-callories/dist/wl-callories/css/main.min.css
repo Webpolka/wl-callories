@@ -1135,6 +1135,12 @@ CALORIE SLIDER MODAL CONTENT
 .calorie-slider-modalContent sup {
   color: inherit;
 }
+.calorie-slider-modalContent-article {
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding-top: 0.625rem;
+}
 .calorie-slider-modalContent_grid {
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -1239,6 +1245,7 @@ CALORIE SLIDER MODAL CONTENT
 }
 .calorie-slider-modalContent_content {
   margin-bottom: 1.875rem;
+  padding-inline: 1.25rem;
 }
 .calorie-slider-modalContent_content h2,
 .calorie-slider-modalContent_content h3,

@@ -123,13 +123,21 @@ RESET CALORIE SLIDER MODAL
 	/* ------------------------------------------------------------------------------------------------------------------------------
 CALORIE SLIDER MODAL STYLES
 --------------------------------------------------------------------------------------------------------------------------------*/
+	&-article{
+		overflow: hidden;
+		border: 1px solid rgb(0, 0, 0, 0.2);
+		border-radius: 10px;
+
+		padding-top: rem(10);
+	}	
+
 	&_grid {
 		display: grid;
 		grid-template-columns: 1fr 4fr;
-		gap: rem(20);
+		gap: rem(20);		
 	}
 	&_image {
-		display: flex;		
+		display: flex;
 
 		&.salaty {
 			justify-content: flex-start;
@@ -199,10 +207,11 @@ CALORIE SLIDER MODAL STYLES
 	}
 
 	&_nutrients {
-		margin-bottom: rem(20);
+		margin-bottom: rem(20);		
+
 		p,
 		li {
-			text-align: center;			
+			text-align: center;
 			color: var(--text);
 			font-size: rem(14);
 			@media (max-width: 440px) {
@@ -213,7 +222,7 @@ CALORIE SLIDER MODAL STYLES
 		strong {
 			display: block;
 			text-align: center;
-			
+
 			font-size: rem(16);
 			color: var(--text);
 
@@ -235,6 +244,8 @@ CALORIE SLIDER MODAL STYLES
 
 	&_content {
 		margin-bottom: rem(30);
+
+		padding-inline: rem(20);
 
 		h2,
 		h3,

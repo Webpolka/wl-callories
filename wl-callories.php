@@ -101,6 +101,7 @@ function callories_page_callback()
 {
     echo '<h2>Как использовать слайдер WL-Callories-Slider ?</h2>';
     echo '<p>1. Загрузите изображения салатов и гарниров, и заполните входные данные в соответствующих разделах.</p>';
+    echo '<p>Изображения могут быть любых размеров но пропорция должна быть 1/2 (рекомендовано: ширина - 750 / высота - 1500), формата webp </p>';            
     echo '<p>2. Вставьте шорткод в нужном месте страницы или записи:</p>';
     echo '<strong style="display:block;">[wl-callories-slider]</strong>';
     echo '<p>если хотите поменять заголовок, стили заголовка, максимальную ширины(max_width) слайдера, цвет бегунка(color_accent) в модальном окне или кол-во изображений(initial_img) для подгрузки воспользуйтесь атрибутами:</p>';        
@@ -268,7 +269,7 @@ function wl_callories_enqueue_scripts()
     // Регистрация и подключение CSS
     wp_enqueue_style(
         'wl-callories-slider-styles', // уникальный хэндл
-        plugins_url('wl-callories/dist/wl-callories/css/main.min.css', __FILE__), // путь к файлу стилей
+        plugins_url('wl-callories/dist/wl-callories/postcss/main.min.css', __FILE__), // путь к файлу стилей
         array(), // зависимости
         '1.0', // версия
         'all' // медиа

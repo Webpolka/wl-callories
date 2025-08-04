@@ -822,13 +822,46 @@ button.swiper-pagination-bullet {
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------
-EXTRA
+MODAL CALCULATOR CONTENT STYLES
 --------------------------------------------------------------------------------------------------------------------------*/
 
-.weblegko-container {
-  margin-inline: auto;
-  max-inline-size: 1280px;
-  padding-inline: 15px;
+.calorie-modal_content .calculation-result-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: rgb(68, 68, 68);
+  padding-top: 0.9375rem;
+  padding-bottom: 0.9375rem;
+}
+
+.calorie-modal_content .calculation-result-inner h2,
+.calorie-modal_content .calculation-result-inner h3,
+.calorie-modal_content .calculation-result-inner h4 {
+  padding: initial;
+  margin: initial;
+  font-family: "OpenSans", sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 120%;
+}
+
+.calorie-modal_content .calculation-result-inner ul {
+  margin-bottom: 0.9375rem;
+}
+
+.calorie-modal_content .calculation-result-inner p,
+.calorie-modal_content .calculation-result-inner li {
+  padding: initial;
+  margin: initial;
+  margin-bottom: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 120%;
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------
@@ -1072,7 +1105,7 @@ CALLORIE CALCULATOR
 .calorie-calculator-form .form-actions input[type=button],
 .calorie-calculator-form .form-actions input[type=submit] {
   display: inline-block;
-  background: #4caf50;
+  background: var(--wl-accent-color);
   border: solid 1px #688586;
   border-radius: 3px;
   font-size: 0.875rem;
@@ -1111,7 +1144,7 @@ CALLORIE CALCULATOR
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 1.875rem;
+  gap: 1.25rem;
   color: rgb(68, 68, 68);
   padding-top: 3.125rem;
   padding-bottom: 1.25rem;
@@ -1120,60 +1153,63 @@ CALLORIE CALCULATOR
 .calorie-calculator .calculation-result-inner h3 {
   padding: initial;
   margin: initial;
-  font-size: ren(15);
+  font-size: 0.9375rem;
   font-weight: 700;
   line-height: 120%;
 }
 
-.calorie-calculator .calculation-result-inner p {
+.calorie-calculator .calculation-result-inner ul {
+  margin-bottom: 0.9375rem;
+}
+
+.calorie-calculator .calculation-result-inner p,
+.calorie-calculator .calculation-result-inner li {
   padding: initial;
   margin: initial;
-  font-size: ren(15);
+  margin-bottom: 0.625rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   line-height: 120%;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------
-CALORIE PAGE
+CALORIE SLIDER MODAL CONTENT
 --------------------------------------------------------------------------------------------------------------------------------*/
 
-.calorie-page {
+.calorie-slider-modalContent {
   --font-main: "OpenSans", sans-serif;
   --font-title: "OpenSans", sans-serif;
   --text: rgb(28, 30, 32);
-  --max-slider-width: 445px;
-  min-inline-size: 280px;
-  max-inline-size: var(--max-slider-width);
   font-family: var(--font-main);
   margin-inline: auto;
   /* ------------------------------------------------------------------------------------------------------------------------------
-  RESET CALORIE PAGE
+  RESET CALORIE SLIDER MODAL
   --------------------------------------------------------------------------------------------------------------------------------*/
   /* ------------------------------------------------------------------------------------------------------------------------------
-  CALORIE PAGE STYLES
+  CALORIE SLIDER MODAL STYLES
   --------------------------------------------------------------------------------------------------------------------------------*/
 }
 
-.calorie-page * {
+.calorie-slider-modalContent * {
   margin: 0;
   border: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
-.calorie-page *,
-.calorie-page *::before,
-.calorie-page *::after {
+.calorie-slider-modalContent *,
+.calorie-slider-modalContent *::before,
+.calorie-slider-modalContent *::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.calorie-page *:focus,
-.calorie-page *:active {
+.calorie-slider-modalContent *:focus,
+.calorie-slider-modalContent *:active {
   outline: none;
 }
 
-.calorie-page .visually-hidden {
+.calorie-slider-modalContent .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1186,36 +1222,36 @@ CALORIE PAGE
   border: 0;
 }
 
-.calorie-page nav,
-.calorie-page footer,
-.calorie-page header,
-.calorie-page aside {
+.calorie-slider-modalContent nav,
+.calorie-slider-modalContent footer,
+.calorie-slider-modalContent header,
+.calorie-slider-modalContent aside {
   display: block;
 }
 
-.calorie-page input,
-.calorie-page button,
-.calorie-page textarea {
+.calorie-slider-modalContent input,
+.calorie-slider-modalContent button,
+.calorie-slider-modalContent textarea {
   font-family: inherit;
 }
 
-.calorie-page input::-ms-clear {
+.calorie-slider-modalContent input::-ms-clear {
   display: none;
 }
 
-.calorie-page input[type=number] {
+.calorie-slider-modalContent input[type=number] {
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   appearance: textfield;
 }
 
-.calorie-page input[type=number]::-webkit-outer-spin-button,
-.calorie-page input[type=number]::-webkit-inner-spin-button {
+.calorie-slider-modalContent input[type=number]::-webkit-outer-spin-button,
+.calorie-slider-modalContent input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   appearance: none;
 }
 
-.calorie-page button {
+.calorie-slider-modalContent button {
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1224,12 +1260,12 @@ CALORIE PAGE
   background-color: transparent;
 }
 
-.calorie-page button::-moz-focus-inner {
+.calorie-slider-modalContent button::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
 
-.calorie-page a {
+.calorie-slider-modalContent a {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -1237,64 +1273,82 @@ CALORIE PAGE
   text-decoration: none;
 }
 
-.calorie-page a:hover {
+.calorie-slider-modalContent a:hover {
   text-decoration: none;
 }
 
-.calorie-page a:focus,
-.calorie-page a:active {
+.calorie-slider-modalContent a:focus,
+.calorie-slider-modalContent a:active {
   outline: none;
 }
 
-.calorie-page a:visited {
+.calorie-slider-modalContent a:visited {
   text-decoration: none;
 }
 
-.calorie-page ul,
-.calorie-page li {
+.calorie-slider-modalContent ul,
+.calorie-slider-modalContent li {
   list-style: none;
 }
 
-.calorie-page img {
+.calorie-slider-modalContent img {
   vertical-align: top;
 }
 
-.calorie-page h1,
-.calorie-page h2,
-.calorie-page h3,
-.calorie-page h4,
-.calorie-page h5,
-.calorie-page h6 {
+.calorie-slider-modalContent h1,
+.calorie-slider-modalContent h2,
+.calorie-slider-modalContent h3,
+.calorie-slider-modalContent h4,
+.calorie-slider-modalContent h5,
+.calorie-slider-modalContent h6 {
   font-size: inherit;
   font-weight: 400;
 }
 
-.calorie-page sup {
+.calorie-slider-modalContent sup {
   color: inherit;
 }
 
-.calorie-page_image {
+.calorie-slider-modalContent-article {
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding-top: 0.625rem;
+}
+
+.calorie-slider-modalContent_grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1.25rem;
+}
+
+.calorie-slider-modalContent_image {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 3.125rem;
 }
 
-.calorie-page_image.salad {
+.calorie-slider-modalContent_image.salaty {
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
 
-.calorie-page_image.garnir {
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
+.calorie-slider-modalContent_image.garniry {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
-.calorie-page_image img {
+.calorie-slider-modalContent_image.garniry img {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.calorie-slider-modalContent_image img {
   display: block;
-  width: 60%;
+  width: 100%;
   height: auto;
   max-width: 100%;
   max-height: 100%;
@@ -1302,7 +1356,7 @@ CALORIE PAGE
   object-fit: contain;
 }
 
-.calorie-page_backbtn {
+.calorie-slider-modalContent_backbtn {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -1316,67 +1370,79 @@ CALORIE PAGE
   font-size: 0.875rem;
 }
 
-.calorie-page_backbtn:hover {
+.calorie-slider-modalContent_backbtn:hover {
   opacity: 0.75;
 }
 
-.calorie-page_title {
-  font-size: 1.5rem;
-  text-align: center;
-  color: var(--text);
+.calorie-slider-modalContent_header {
   margin-bottom: 1.25rem;
 }
 
-.calorie-page_nutrients {
-  text-align: center;
-  color: var(--text);
-  font-size: 0.875rem;
-  margin-bottom: 1.25rem;
-}
-
-.calorie-page_nutrients strong {
+.calorie-slider-modalContent_title {
   display: block;
+  font-size: 1.375rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.calorie-slider-modalContent_nutrients {
+  margin-bottom: 1.25rem;
+}
+
+.calorie-slider-modalContent_nutrients p,
+.calorie-slider-modalContent_nutrients li {
+  text-align: center;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.calorie-slider-modalContent_nutrients strong {
+  display: block;
+  text-align: center;
   font-size: 1rem;
   color: var(--text);
   margin-bottom: 0.9375rem;
 }
 
-.calorie-page_serving {
+.calorie-slider-modalContent_serving {
   text-align: center;
   font-size: 0.875rem;
   color: var(--text);
   margin-bottom: 0.9375rem;
 }
 
-.calorie-page_content {
-  margin-bottom: 6.25rem;
+.calorie-slider-modalContent_content {
+  margin-bottom: 1.875rem;
+  padding-inline: 1.25rem;
 }
 
-.calorie-page_content h3,
-.calorie-page_content h4 {
-  padding-top: 2.5rem;
+.calorie-slider-modalContent_content h2,
+.calorie-slider-modalContent_content h3,
+.calorie-slider-modalContent_content h4 {
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.1875rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 1.25rem;
 }
 
-.calorie-page_content ul {
+.calorie-slider-modalContent_content ul {
   margin-bottom: 0.625rem;
 }
 
-.calorie-page_content ul li {
+.calorie-slider-modalContent_content ul li {
   margin-left: 1.2rem;
   list-style: disc;
 }
 
-.calorie-page_content p {
+.calorie-slider-modalContent_content p {
   margin-bottom: 0.625rem;
 }
 
-.calorie-page_content p,
-.calorie-page_content li {
+.calorie-slider-modalContent_content p,
+.calorie-slider-modalContent_content li {
   font-size: 0.875rem;
   color: var(--text);
 }
@@ -1758,16 +1824,14 @@ CALORIE SLIDER
 MODAL STYLES
 --------------------------------------------------------------------------------------------------------------------------*/
 
-.modal_overlay {
+.calorie-modal_overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -1775,98 +1839,77 @@ MODAL STYLES
   -ms-flex-align: center;
   align-items: center;
   z-index: 1000;
+  min-inline-size: 290px;
+  padding-inline: 0.9375rem;
 }
 
-.modal_overlay ::-webkit-scrollbar {
+.calorie-modal_overlay.show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.calorie-modal_overlay ::-webkit-scrollbar {
   width: 10px;
 }
 
-.modal_overlay ::-webkit-scrollbar-track {
+.calorie-modal_overlay ::-webkit-scrollbar-track {
   background: #edece9;
   border-radius: 8px;
 }
 
-.modal_overlay ::-webkit-scrollbar-thumb {
-  background: rgb(255, 125, 27);
+.calorie-modal_overlay ::-webkit-scrollbar-thumb {
+  background: var(--wl-accent-color);
   border-radius: 8px;
   border: 3px solid #edece9;
   width: 6px;
   cursor: pointer;
 }
 
-.modal_overlay ::-webkit-scrollbar-thumb:hover {
-  background: rgb(200, 87, 1);
+.calorie-modal_overlay ::-webkit-scrollbar-thumb:hover {
+  background: var(--wl-accent-color);
 }
 
-.modal_content {
+.calorie-modal_content {
+  max-width: 800px;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 0.625rem;
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  width: 90%;
-  max-width: 565px;
+  width: 100%;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-animation: fadeInScale 0.3s ease-out;
-  animation: fadeInScale 0.3s ease-out;
+  -webkit-animation: fadeUp 0.3s ease-out;
+  animation: fadeUp 0.3s ease-out;
+  overflow: hidden;
 }
 
-.modal_header {
+.calorie-modal_header {
   position: relative;
-  padding: 0 15px;
   text-align: center;
+  min-height: 2.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
-.modal_header h2 {
-  display: inline-block;
-  font-family: "MuseOsans", sans-serif;
-  position: relative;
-  color: black;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
-}
-
-.modal_header h2:after {
-  display: block;
-  width: 100%;
-  height: 3px;
-  margin-top: 8px;
-  border-radius: 2px;
-  background-color: rgb(255, 150, 27);
-  content: "";
-}
-
-.modal_body {
+.calorie-modal_body {
   max-height: 65vh;
-  overflow-y: scroll;
-  padding-inline: 15px;
+  overflow-y: auto;
+  padding-inline: 0.9375rem;
+  padding-block: 0.9375rem;
   background-color: rgb(248, 248, 248);
   font-family: "MuseOsans", sans-serif;
 }
 
-.modal_body p,
-.modal_body li {
-  font-size: 16px;
-  line-height: 150%;
-  color: rgba(36, 31, 32, 0.75);
-}
-
-.modal_body ul {
-  padding-left: 16px;
-}
-
-.modal_body h3 {
-  margin-top: 24px;
-}
-
-.modal_body b {
-  display: block;
-}
-
-.modal_footer {
-  padding: 15px;
+.calorie-modal_footer {
+  padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1875,19 +1918,28 @@ MODAL STYLES
   justify-content: flex-end;
 }
 
-.close_header {
+.calorie-close_header {
   all: unset;
   position: absolute;
-  top: 16px;
-  right: 16px;
+  right: 10px;
+  height: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   cursor: pointer;
 }
 
-.close_header:hover {
+.calorie-close_header:hover {
   color: #333;
 }
 
-.close_footer {
+.calorie-close_footer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1914,31 +1966,23 @@ MODAL STYLES
 
 /* Анимация появления модала */
 
-@-webkit-keyframes fadeInScale {
+@-webkit-keyframes fadeUp {
   from {
     opacity: 0;
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
   }
 }
 
-@keyframes fadeInScale {
+@keyframes fadeUp {
   from {
     opacity: 0;
-    -webkit-transform: scale(0.9);
-    transform: scale(0.9);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
   }
 }
 
@@ -1961,7 +2005,7 @@ MODAL STYLES
 }
 
 @media (max-width: 576px) {
-  .calorie-page_title {
+  .calorie-slider-modalContent_header {
     font-size: 1.25rem;
   }
 
@@ -1980,6 +2024,21 @@ MODAL STYLES
 }
 
 @media (max-width: 440px) {
+  .calorie-modal_content .calculation-result-inner {
+    gap: 0.9375rem;
+  }
+
+  .calorie-modal_content .calculation-result-inner h2,
+  .calorie-modal_content .calculation-result-inner h3,
+  .calorie-modal_content .calculation-result-inner h4 {
+    font-size: 1rem;
+  }
+
+  .calorie-modal_content .calculation-result-inner p,
+  .calorie-modal_content .calculation-result-inner li {
+    font-size: 0.875rem;
+  }
+
   .calorie-calculator h2.calorie-calculator-title {
     font-size: 1.5rem;
     margin-bottom: 1.25rem;
@@ -2012,7 +2071,35 @@ MODAL STYLES
     font-size: 0.875rem;
   }
 
-  .calorie-calculator .calculation-result-inner p {
+  .calorie-calculator .calculation-result-inner p,
+  .calorie-calculator .calculation-result-inner li {
+    font-size: 0.875rem;
+  }
+
+  .calorie-slider-modalContent_image.salaty img {
+    -webkit-transform: scale(1.75) translateY(18px);
+    -ms-transform: scale(1.75) translateY(18px);
+    transform: scale(1.75) translateY(18px);
+  }
+
+  .calorie-slider-modalContent_image.garniry img {
+    -webkit-transform: rotate(180deg) scale(1.75) translateY(-18px);
+    -ms-transform: rotate(180deg) scale(1.75) translateY(-18px);
+    transform: rotate(180deg) scale(1.75) translateY(-18px);
+  }
+
+  .calorie-slider-modalContent_title {
+    font-size: 1.125rem;
+    margin-bottom: 0.9375rem;
+    line-height: 110%;
+  }
+
+  .calorie-slider-modalContent_nutrients p,
+  .calorie-slider-modalContent_nutrients li {
+    font-size: 0.8125rem;
+  }
+
+  .calorie-slider-modalContent_nutrients strong {
     font-size: 0.875rem;
   }
 

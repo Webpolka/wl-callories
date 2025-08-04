@@ -1428,6 +1428,9 @@ CALORIE SLIDER
   aspect-ratio: 117/233;
   overflow: hidden;
 }
+.calorie-slider .swiper-wrapper {
+  z-index: inherit !important;
+}
 .calorie-slider .swiper-slide {
   transition: all 0.3s ease;
 }

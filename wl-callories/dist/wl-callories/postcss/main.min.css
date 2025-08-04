@@ -1685,6 +1685,10 @@ CALORIE SLIDER
   overflow: hidden;
 }
 
+.calorie-slider .swiper-wrapper {
+  z-index: inherit !important;
+}
+
 .calorie-slider .swiper-slide {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;

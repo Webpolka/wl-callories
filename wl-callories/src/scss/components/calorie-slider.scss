@@ -180,6 +180,10 @@ CALORIE SLIDER RESET
 		aspect-ratio: 117/233;
 		overflow: hidden;
 	}
+
+	.swiper-wrapper{
+		z-index: inherit !important;
+	}
 	.swiper-slide {
 		transition: all 0.3s ease;
 

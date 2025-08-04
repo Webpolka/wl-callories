@@ -1,3 +1,5 @@
+/* !!!!!!!!! ПОДКЛЮЧИ JQUERY ЕСЛИ БЕЗ ВОРДПРЕССА !!!!!!!!!! */
+
 /*---------------------------------------------------------------------------------------------------------------------
  * Swiper 6.8.4
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -10494,25 +10496,27 @@
 });
 //# sourceMappingURL=swiper-bundle.js.map
 
+
 /*---------------------------------------------------------------------------------------------------------------------
-CALLORIE SLIDER SCRIPT
+Callorie calculator script
 ------------------------------------------------------------------------------------------------------------------------*/
+
 document.addEventListener("DOMContentLoaded", () => {
 	const calorieSliderWrap = document.querySelector("#calorie-slider");
 
+	const totalGarnirSlides = document.querySelectorAll("#garnirs-swiper .swiper-slide").length;
+	const randomGarnirIndex = Math.floor(Math.random() * totalGarnirSlides);
+
+	const totalSaladSlides = document.querySelectorAll("#salads-swiper .swiper-slide").length;
+	const randomSaladsIndex = Math.floor(Math.random() * totalSaladSlides);
+
 	if (calorieSliderWrap) {
-		const totalGarnirSlides = document.querySelectorAll("#garnirs-swiper .swiper-slide").length;
-		const randomGarnirIndex = Math.floor(Math.random() * totalGarnirSlides);
-
-		const totalSaladSlides = document.querySelectorAll("#salads-swiper .swiper-slide").length;
-		const randomSaladsIndex = Math.floor(Math.random() * totalSaladSlides);
-
 		const swiperGarnirs = new Swiper("#garnirs-swiper", {
 			// Optional parameters
 			initialSlide: randomGarnirIndex,
+			loop: true,
 			direction: "vertical",
 			autoHeight: true,
-			loop: true,
 			spaceBetween: 3,
 
 			// Navigation arrows
@@ -10522,6 +10526,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			},
 
 			on: {
+				slideChange: function () {
+					updateSlideImages(this, "#garnirs-swiper");
+				},
 				slideChangeTransitionEnd: updateInfo,
 				touchStart: function () {
 					// ничего не делаем, подготовка
@@ -10568,6 +10575,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		const swiperSalats = new Swiper("#salads-swiper", {
 			// Optional parameters
+
 			initialSlide: randomSaladsIndex,
 			direction: "vertical",
 			autoHeight: true,
@@ -10580,6 +10588,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				prevEl: ".swiper-button-prev",
 			},
 			on: {
+				slideChange: function () {
+					updateSlideImages(this, "#salads-swiper");
+				},
 				slideChangeTransitionEnd: updateInfo,
 				touchStart: function () {
 					// ничего не делаем, подготовка
@@ -10624,6 +10635,26 @@ document.addEventListener("DOMContentLoaded", () => {
 			},
 		});
 
+		// Функция обновления изображений
+		function updateSlideImages(swiperInstance, sliderEl) {
+			const initialRadius = Number(document.querySelector(sliderEl).dataset.initial);
+			const slides = swiperInstance.slides;
+			const currentIndex = swiperInstance.activeIndex;
+
+			const total = slides.length;
+			const radius = Math.min(initialRadius, Math.floor(total / 2)); // менять 2 с двух сторон
+
+			for (let offset = -radius; offset <= radius; offset++) {
+				let index = (currentIndex + offset + total) % total; // цикл
+				const slide = slides[index];
+				const img = slide.querySelector("img");
+				if (img && img.dataset.src && img.dataset.updated == "false") {
+					img.src = img.dataset.src;
+					img.dataset.updated = "true";
+				}
+			}
+		}
+
 		function updateInfo() {
 			// Получаем активный слайд
 			const activeGarnirSlide = calorieSliderWrap.querySelector("#garnirs-swiper .swiper-slide-active");
@@ -10631,8 +10662,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			if (!activeGarnirSlide || !activeSaladSlide) return;
 
-			const linkGarnir = activeGarnirSlide.querySelector("a.calorie-card");
-			const linkSalad = activeSaladSlide.querySelector("a.calorie-card");
+			const linkGarnir = activeGarnirSlide.querySelector(".calorie-card");
+			const linkSalad = activeSaladSlide.querySelector(".calorie-card");
 
 			if (!linkGarnir || !linkSalad) return;
 
@@ -10699,12 +10730,86 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 });
 
-/*---------------------------------------------------------------------------------------------------------------------
-Callorie calculator script
-------------------------------------------------------------------------------------------------------------------------*/
 document.addEventListener("DOMContentLoaded", () => {
+	document.documentElement.insertAdjacentHTML(
+		"beforeend",
+		`
+  	  <div class="calorie-modal_overlay" id="myModal">		  
+		  <div class="calorie-modal_content">			
+			<div class="calorie-modal_header">
+			  <div id="modalTitle"></div>
+			  <button class="calorie-close_header" data-closeModal aria-label="Закрыть модальное окно">
+				<svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><g filter="url(#close_svg__a)"><circle cx="16" cy="16" r="12" fill="#fff"></circle><path d="m20 12-8 8m0-8 8 8" stroke="#000000" stroke-width="2" stroke-linecap="round"></path></g><defs><filter id="close_svg__a" x="0" y="0" width="32" height="32" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset></feOffset><feGaussianBlur stdDeviation="2"></feGaussianBlur><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix><feBlend in2="BackgroundImageFix" result="effect1_dropShadow"></feBlend><feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"></feBlend></filter></defs></svg>
+			  </button>
+			</div>	
+			<div class="calorie-modal_body" id="myModalContent"></div>	
+			 <div class="calorie-modal_footer"></div>		  
+		  </div>
+		</div>`
+	);
+
+	function getCSSVariableValue(element, variableName) {
+		// Используем getComputedStyle для получения стилей, примененных к элементу
+		const style = getComputedStyle(element);
+		const value = style.getPropertyValue(variableName);
+		return value.trim() || null;
+	}
+
+	const accentCalc = getCSSVariableValue(document.querySelector("#calorie-calculator"), "--wl-accent-color");
+	const accentSlider = getCSSVariableValue(document.querySelector("#calorie-slider"), "--wl-accent-color");
+	const accentColor = accentCalc || accentSlider;
+
+	document.querySelector("#myModal").setAttribute("style", `--wl-accent-color:${accentColor};`);
+});
+
+// Обработка модалки
+jQuery(document).ready(function ($) {
+	var scrollBarWidth = $(window).outerWidth() - $(document).width();
+	// Отключить скролл
+	function disableScroll() {
+		$("body").css({
+			overflow: "hidden",
+			"padding-right": `${scrollBarWidth}px`,
+		});
+	}
+
+	// Включить скролл
+	function enableScroll() {
+		$("body").css({
+			overflow: "",
+			"padding-right": "",
+		});
+	}
+
+	$(".wl-open-modal").on("click", function (e) {
+		e.preventDefault();
+		var postId = $(this).data("postid");
+		$("#myModalContent").html("Загрузка...");
+		$("#myModal").addClass("show"); // или используйте свою реализацию модального окна
+		disableScroll();
+
+		$.ajax({
+			url: MyAjax.ajaxurl, // глобальная переменная в админке, для фронта нужно определить свою
+			type: "post",
+			data: {
+				action: "get_custom_fields",
+				post_id: postId,
+			},
+			success: function (response) {
+				$("#myModalContent").html(response);
+			},
+		});
+	});
+
+	// Закрытие модального окна
+	$("[data-closeModal]").on("click", function () {
+		$("#myModal").removeClass("show");
+		enableScroll();
+	});
+
 	const form = document.getElementById("calorieForm");
 	const resultDiv = document.getElementById("calorie-results");
+	const modalTrue = form.querySelector('button[data-modal="true"]');
 
 	if (form && resultDiv) {
 		form.addEventListener("submit", (event) => {
@@ -10760,29 +10865,45 @@ document.addEventListener("DOMContentLoaded", () => {
 			const avgCalories = Math.round((rangeH.min + rangeH.max + rangeM.min + rangeM.max) / 4);
 			const macros = calcMacros(avgCalories);
 
-			// 5) Вывод результатов
-			resultDiv.innerHTML = `
-	  <div class="calculation-result-inner">
+			const resHtml = `
+			  <div class="calculation-result-inner">
+				<h3>Расчет суточной нормы калорий :</h3>
+				 <ul>
+					<li>по Харрису–Бенедикту ${tdeeHarris} ккал/день</li>
+				 	<li>по Миффлину–Сан Жеора ${tdeeMifflin} ккал/день</li>
+				 </ul>
 
-		<h3>Расчет суточной нормы калорий :</h3>
-		 <p>по Харрису–Бенедикту ${tdeeHarris} ккал/день</p>
-		 <p>по Миффлину–Сан Жеора ${tdeeMifflin} ккал/день</p>
+				 <h3>Рекомендации для ${ratios.t}</h3>		
+				 <ul>
+				 	<li>диапазон каллорий ${rangeMiddle.min}–${rangeMiddle.max} </li>
+				 	<li>суточная норма белков : ${macros.proteins} грамм</li>
+				 	<li>суточная норма жиров : ${macros.fats} грамм</li>
+				 	<li>суточная норма углеводов : ${macros.carbs} грамм</li>
+				</ul>
+			  </div>`;
 
-		 <h3>Рекомендации для ${ratios.t}</h3>		
-		 <p>диапазон каллорий ${rangeMiddle.min}–${rangeMiddle.max} </p>
-		 <p>суточная норма белков : ${macros.proteins} грамм</p>
-		 <p>суточная норма жиров : ${macros.fats} грамм</p>
-		<p>суточная норма углеводов : ${macros.carbs} грамм</p>
-	  </div>`;
-
-			// Скролл к элементу
-			resultDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+			if (modalTrue) {
+				$("#myModal").addClass("show");
+				$("#myModalContent").html(resHtml);
+				disableScroll();
+			} else {
+				// 5) Вывод результатов
+				resultDiv.innerHTML = resHtml;
+				// Скролл к элементу
+				resultDiv.scrollIntoView({ behavior: "smooth", block: "start" });
+			}
 		});
 
 		// Сбрасываем результаты
-		form.addEventListener("reset", (event) => {
-			const resultDiv = document.getElementById("calorie-results");
-			resultDiv.innerHTML = "";
+		form.addEventListener("reset", function (event) {
+			if (modalTrue) {
+				$("#myModalContent").html("");
+				$("#myModal").removeClass("show");
+				enableScroll();
+			} else {
+				const resultDiv = document.getElementById("calorie-results");
+				resultDiv.innerHTML = "";
+			}
 		});
 
 		// Ограничитель min/max в input

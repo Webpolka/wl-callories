@@ -1,0 +1,266 @@
+/* ------------------------------------------------------------------------------------------------------------------------------
+CALORIE SLIDER MODAL CONTENT
+--------------------------------------------------------------------------------------------------------------------------------*/
+.calorie-slider-modalContent {
+	--font-main: "OpenSans", sans-serif;
+	--font-title: "OpenSans", sans-serif;
+
+	--text: rgb(28, 30, 32);
+
+	font-family: var(--font-main);
+	margin-inline: auto;
+
+	/* ------------------------------------------------------------------------------------------------------------------------------
+RESET CALORIE SLIDER MODAL
+--------------------------------------------------------------------------------------------------------------------------------*/
+	* {
+		margin: 0;
+		border: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: transparent;
+
+		&,
+		&::before,
+		&::after {
+			box-sizing: border-box;
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap; /* предотвращает перенос текста */
+		border: 0;
+	}
+
+	nav,
+	footer,
+	header,
+	aside {
+		display: block;
+	}
+
+	input,
+	button,
+	textarea {
+		font-family: inherit;
+	}
+
+	input::-ms-clear {
+		display: none;
+	}
+
+	input[type="number"] {
+		appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none;
+		}
+	}
+
+	button {
+		cursor: pointer;
+		user-select: none;
+		background-color: transparent;
+
+		&::-moz-focus-inner {
+			border: 0;
+			padding: 0;
+		}
+	}
+
+	a {
+		user-select: none;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+
+		&:visited {
+			text-decoration: none;
+		}
+	}
+
+	ul,
+	li {
+		list-style: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: inherit;
+		font-weight: 400;
+	}
+
+	sup {
+		color: inherit;
+	}
+	/* ------------------------------------------------------------------------------------------------------------------------------
+CALORIE SLIDER MODAL STYLES
+--------------------------------------------------------------------------------------------------------------------------------*/
+	&_grid {
+		display: grid;
+		grid-template-columns: 1fr 4fr;
+		gap: rem(20);
+	}
+	&_image {
+		display: flex;		
+
+		&.salaty {
+			justify-content: flex-start;
+			@media (max-width: 440px) {
+				img {
+					transform: scale(1.75) translateY(18px);
+				}
+			}
+		}
+		&.garniry {
+			justify-content: flex-start;
+			img {
+				transform: rotate(180deg);
+			}
+			@media (max-width: 440px) {
+				img {
+					transform: rotate(180deg) scale(1.75) translateY(-18px);
+				}
+			}
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+		}
+	}
+	&_backbtn {
+		display: inline-flex;
+		align-items: center;
+		gap: rem(5);
+		color: black;
+		transition: all 0.3s ease-in-out;
+
+		font-size: rem(14);
+
+		&:hover {
+			opacity: 0.75;
+		}
+	}
+
+	&_header {
+		margin-bottom: rem(20);
+
+		@include sm {
+			font-size: rem(20);
+		}
+	}
+	&_title {
+		display: block;
+
+		font-size: rem(22);
+		font-weight: 600;
+		text-align: center;
+		color: var(--text);
+
+		margin-bottom: rem(20);
+
+		@media (max-width: 440px) {
+			font-size: rem(18);
+			margin-bottom: rem(15);
+			line-height: 110%;
+		}
+	}
+
+	&_nutrients {
+		margin-bottom: rem(20);
+		p,
+		li {
+			text-align: center;			
+			color: var(--text);
+			font-size: rem(14);
+			@media (max-width: 440px) {
+				font-size: rem(13);
+			}
+		}
+
+		strong {
+			display: block;
+			text-align: center;
+			
+			font-size: rem(16);
+			color: var(--text);
+
+			margin-bottom: rem(15);
+
+			@media (max-width: 440px) {
+				font-size: rem(14);
+			}
+		}
+	}
+
+	&_serving {
+		text-align: center;
+		font-size: rem(14);
+		color: var(--text);
+
+		margin-bottom: rem(15);
+	}
+
+	&_content {
+		margin-bottom: rem(30);
+
+		h2,
+		h3,
+		h4 {
+			text-align: center;
+			font-size: rem(19);
+			font-weight: 600;
+
+			color: var(--text);
+
+			margin-bottom: rem(20);
+		}
+		ul {
+			margin-bottom: rem(10);
+			li {
+				margin-left: 1.2rem;
+				list-style: disc;
+			}
+		}
+		p {
+			margin-bottom: rem(10);
+		}
+		p,
+		li {
+			font-size: rem(14);
+			color: var(--text);
+		}
+	}
+}

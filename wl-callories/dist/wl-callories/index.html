@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+	<head>  
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Слайдер</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/main.min.css">  
+</head>
+ 
+ 
+
+	<body>
+		<section class="calorie-slider" id="calorie-slider" itemscope itemtype="https://schema.org/WebPage">
+	<header>
+		<h2 class="calorie-slider-title" itemprop="headline">Тарелки по Методу тарелки</h2>
+		<p>
+			На тарелке:
+			<span id="calorie-sum-weight" itemprop="weight">515</span> г, 
+			<span id="calorie-sum-kkal" itemprop="calories">447</span> ккал Б:
+			<span id="calorie-sum-protein" itemprop="proteinContent">32</span> г Ж:
+			<span id="calorie-sum-fats" itemprop="fatContent">13</span> г У:
+			<span id="calorie-sum-carbo" itemprop="carbohydrateContent">50</span> г
+		</p>
+	</header>
+
+	<div class="calorie-slider_row">
+		<!-- ЛЕВАЯ СТОРОНА -->
+		<div class="calorie-slider_col" itemscope itemtype="https://schema.org/ItemList">
+			<!-- Слайдер гарниров -->
+			<div class="swiper" id="garnirs-swiper" itemprop="itemList">
+				<div class="swiper-button-prev" aria-label="Предыдущий слайд" role="button" aria-disabled="false">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M9.99998 17.5C9.81933 17.5 9.64084 17.4608 9.47685 17.385C9.31287 17.3093 9.16731 17.1988 9.05027 17.0612L4.68281 11.9368C4.61159 11.8527 4.57664 11.7437 4.58561 11.6338C4.59459 11.5239 4.64677 11.422 4.73071 11.3505C4.81465 11.279 4.92351 11.2437 5.03344 11.2523C5.14337 11.2609 5.24541 11.3128 5.31719 11.3965L9.58331 16.402L9.58331 2.91667C9.58331 2.80616 9.62721 2.70018 9.70535 2.62204C9.78349 2.5439 9.88947 2.5 9.99998 2.5C10.1105 2.5 10.2165 2.5439 10.2946 2.62204C10.3727 2.70018 10.4166 2.80616 10.4166 2.91667L10.4166 16.402L14.6828 11.3965C14.7546 11.3128 14.8566 11.261 14.9666 11.2523C15.0765 11.2437 15.1854 11.279 15.2693 11.3506C15.3532 11.4221 15.4054 11.5239 15.4144 11.6338C15.4234 11.7437 15.3884 11.8527 15.3172 11.9369L10.95 17.061C10.8329 17.1986 10.6873 17.3092 10.5233 17.385C10.3592 17.4608 10.1807 17.5 9.99998 17.5Z" fill="#000000"></path>
+					</svg>
+				</div>
+				<div class="swiper-button-next" aria-label="Следующий слайд" role="button" aria-disabled="false">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M9.99999 2.5C10.1806 2.49996 10.3591 2.53918 10.5231 2.61495C10.6871 2.69072 10.8327 2.80123 10.9497 2.93883L15.3172 8.06317C15.3884 8.14735 15.4233 8.25632 15.4144 8.36622C15.4054 8.47613 15.3532 8.57799 15.2693 8.64949C15.1853 8.72099 15.0765 8.75631 14.9665 8.74769C14.8566 8.73908 14.7546 8.68724 14.6828 8.60354L10.4167 3.59804L10.4167 17.0833C10.4167 17.1938 10.3728 17.2998 10.2946 17.378C10.2165 17.4561 10.1105 17.5 9.99999 17.5C9.88948 17.5 9.7835 17.4561 9.70536 17.378C9.62722 17.2998 9.58332 17.1938 9.58332 17.0833L9.58332 3.59804L5.31716 8.6035C5.24537 8.6872 5.14334 8.73904 5.03341 8.74765C4.92348 8.75626 4.81462 8.72095 4.73068 8.64945C4.64674 8.57794 4.59456 8.47608 4.58558 8.36618C4.5766 8.25628 4.61156 8.1473 4.68278 8.06312L9.04999 2.93904C9.16706 2.80138 9.31265 2.69082 9.47669 2.61501C9.64072 2.5392 9.81928 2.49996 9.99999 2.5Z" fill="#000000"></path>
+					</svg>
+				</div>
+
+				<!-- Карточки гарнира -->
+				<div class="swiper-wrapper">
+					<!-- 1 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="1">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Фарш с луком, фасолью и орехами" data-p="15.9" data-f="11.8" data-c="7.4" data-kkal="210.6" data-serving="300">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/garnirs/1_фарш_фасоль.png" alt="Гарнир" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Фарш с луком, фасолью и орехами">
+							</a>
+						</article>
+					</div>
+					<!-- 2 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="2">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Свиная шея с картофелем" data-p="7.2" data-f="16.4" data-c="7.7" data-kkal="208" data-serving="326">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/garnirs/2_шея_с_картошкой.png" alt="Гарнир" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Свиная шея с картофелем">
+							</a>
+						</article>
+					</div>
+
+					<!-- 3 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="3">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Куриные сердечки с пюре" data-p="8.2" data-f="10.4" data-c="6.3" data-kkal="151.9" data-serving="335">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/garnirs/3_сердечки_пюре.png" alt="Гарнир" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Куриные сердечки с пюре">
+							</a>
+						</article>
+					</div>
+
+					<!-- 4 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="4">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="https://weblegko.ru" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Куриная грудка тика-масала с пастой" data-p="11.1" data-f="7.4" data-c="11.5" data-kkal="157.3" data-serving="350">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/garnirs/4_тика_масала.png" alt="Гарнир" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Куриная грудка тика-масала с пастой">
+							</a>
+						</article>
+					</div>
+
+					<!-- 5 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="1">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="https://weblegko.ru" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Куриная грудка с кускусом" data-p="13.8" data-f="1.2" data-c="12.3" data-kkal="120.1" data-serving="250">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/garnirs/5_грудка_.png" alt="Гарнир" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Куриная грудка с кускусом">
+							</a>
+						</article>
+					</div>
+				</div>
+			</div>
+
+			<!-- Информация о карточке -->
+			<div class="calorie-card-info" itemscope itemtype="https://schema.org/NutritionInformation">
+				<div class="calorie-card-info_title">
+					<p id="calorie-garnirs-title" itemprop="name">Редис, огурцы и кимчи</p>
+				</div>
+				<div class="calorie-card-info_kkal">
+					<p>на 100 г: <span id="calorie-garnirs-kkal" itemprop="calories">100</span> ккал,</p>
+				</div>
+				<div class="calorie-card-info_nutrients" itemscope itemtype="https://schema.org/NutritionInformation">
+					<p>
+						Б : <span id="calorie-garnirs-protein" itemprop="proteinContent">50</span> г Ж :
+						<span id="calorie-garnirs-fats" itemprop="fatContent">50</span> г У :
+						<span id="calorie-garnirs-carbo" itemprop="carbohydrateContent">50</span> г
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- ПРАВАЯ СТОРОНА -->
+		<div class="calorie-slider_col" itemscope itemtype="https://schema.org/ItemList">
+			<!-- Слайдер салатов -->
+			<div class="swiper" id="salads-swiper" itemprop="itemList">
+				<div class="swiper-button-prev" aria-label="Предыдущий слайд" role="button" aria-disabled="false">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M9.99998 17.5C9.81933 17.5 9.64084 17.4608 9.47685 17.385C9.31287 17.3093 9.16731 17.1988 9.05027 17.0612L4.68281 11.9368C4.61159 11.8527 4.57664 11.7437 4.58561 11.6338C4.59459 11.5239 4.64677 11.422 4.73071 11.3505C4.81465 11.279 4.92351 11.2437 5.03344 11.2523C5.14337 11.2609 5.24541 11.3128 5.31719 11.3965L9.58331 16.402L9.58331 2.91667C9.58331 2.80616 9.62721 2.70018 9.70535 2.62204C9.78349 2.5439 9.88947 2.5 9.99998 2.5C10.1105 2.5 10.2165 2.5439 10.2946 2.62204C10.3727 2.70018 10.4166 2.80616 10.4166 2.91667L10.4166 16.402L14.6828 11.3965C14.7546 11.3128 14.8566 11.261 14.9666 11.2523C15.0765 11.2437 15.1854 11.279 15.2693 11.3506C15.3532 11.4221 15.4054 11.5239 15.4144 11.6338C15.4234 11.7437 15.3884 11.8527 15.3172 11.9369L10.95 17.061C10.8329 17.1986 10.6873 17.3092 10.5233 17.385C10.3592 17.4608 10.1807 17.5 9.99998 17.5Z" fill="#000000"></path>
+					</svg>
+				</div>
+				<div class="swiper-button-next" aria-label="Следующий слайд" role="button" aria-disabled="false">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M9.99999 2.5C10.1806 2.49996 10.3591 2.53918 10.5231 2.61495C10.6871 2.69072 10.8327 2.80123 10.9497 2.93883L15.3172 8.06317C15.3884 8.14735 15.4233 8.25632 15.4144 8.36622C15.4054 8.47613 15.3532 8.57799 15.2693 8.64949C15.1853 8.72099 15.0765 8.75631 14.9665 8.74769C14.8566 8.73908 14.7546 8.68724 14.6828 8.60354L10.4167 3.59804L10.4167 17.0833C10.4167 17.1938 10.3728 17.2998 10.2946 17.378C10.2165 17.4561 10.1105 17.5 9.99999 17.5C9.88948 17.5 9.7835 17.4561 9.70536 17.378C9.62722 17.2998 9.58332 17.1938 9.58332 17.0833L9.58332 3.59804L5.31716 8.6035C5.24537 8.6872 5.14334 8.73904 5.03341 8.74765C4.92348 8.75626 4.81462 8.72095 4.73068 8.64945C4.64674 8.57794 4.59456 8.47608 4.58558 8.36618C4.5766 8.25628 4.61156 8.1473 4.68278 8.06312L9.04999 2.93904C9.16706 2.80138 9.31265 2.69082 9.47669 2.61501C9.64072 2.5392 9.81928 2.49996 9.99999 2.5Z" fill="#000000"></path>
+					</svg>
+				</div>
+
+				<!-- Карточки салата -->
+				<div class="swiper-wrapper">
+					<!-- 1 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="1">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Салат из капусты и сладкого перца" data-p="1.2" data-f="2.5" data-c="5" data-kkal="47.3" data-serving="215">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/salads/1_капуста_перец.png" alt="Салат" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Салат из капусты и сладкого перца">
+							</a>
+						</article>
+					</div>
+					<!-- 2 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="2">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Зеленый салат с помидорами и фета" data-p="2.8" data-f="5" data-c="2.8" data-kkal="68" data-serving="235">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/salads/2_помидоры_фета.png" alt="Салат" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Зеленый салат с помидорами и фета">
+							</a>
+						</article>
+					</div>
+					<!-- 3 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="3">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Желтые черри с кинзой" data-p="1.1" data-f="3.9" data-c="3.4" data-kkal="56.3" data-serving="135">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/salads/3_желтые_томаты.png" alt="Салат" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Желтые черри с кинзой">
+							</a>
+						</article>
+					</div>
+					<!-- 4 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="4">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Запеченный баклажан с салатом из помидоров и фета" data-p="2.8" data-f="4" data-c="5.4" data-kkal="69.5" data-serving="300">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/salads/4_баклажан_помидоры.png" alt="Салат" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Запеченный баклажан с салатом из помидоров и фета">
+							</a>
+						</article>
+					</div>
+					<!-- 5 -->
+					<div class="swiper-slide" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+						<meta itemprop="position" content="5">
+						<article itemscope itemtype="https://schema.org/Product">
+							<a href="#" class="calorie-card" itemprop="url" itemscope itemtype="https://schema.org/Thing" data-title="Редис, огурцы и кимчи" data-p="1" data-f="2.1" data-c="2.5" data-kkal="33" data-serving="255">
+								<figure class="calorie-card_image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+									<img src="./images/salads/5_салат_кимчи.png" alt="Салат" itemprop="url">
+								</figure>
+								<meta itemprop="name" content="Редис, огурцы и кимчи">
+							</a>
+						</article>
+					</div>
+				</div>
+			</div>
+			<!-- Инфо о карточке -->
+			<div class="calorie-card-info" itemscope itemtype="https://schema.org/NutritionInformation">
+				<div class="calorie-card-info_title">
+					<p id="calorie-salads-title" itemprop="name">Редис, огурцы и кимчи</p>
+				</div>
+				<div class="calorie-card-info_kkal">
+					<p>на 100 г: <span id="calorie-salads-kkal" itemprop="calories">100</span> ккал,</p>
+				</div>
+				<div class="calorie-card-info_nutrients" itemscope itemtype="https://schema.org/NutritionInformation">
+					<p>
+						Б : <span id="calorie-salads-protein" itemprop="proteinContent">50</span> г Ж :
+						<span id="calorie-salads-fats" itemprop="fatContent">50</span> г У :
+						<span id="calorie-salads-carbo" itemprop="carbohydrateContent">50</span> г
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+ 
+		<script src="./js/main.min.js"></script>
+
+
+	</body>
+</html>

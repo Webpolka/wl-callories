@@ -1,0 +1,129 @@
+/*-------------------------------------------------------------------------------------------------------------------------
+MODAL STYLES
+--------------------------------------------------------------------------------------------------------------------------*/
+
+.calorie-modal_overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+
+	min-inline-size: 290px;
+
+	padding-inline: rem(15);
+
+	&.show {
+		display: flex;
+	}
+
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+	::-webkit-scrollbar-track {
+		background: #edece9;
+		border-radius: 8px;
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--wl-accent-color);
+		border-radius: 8px;
+		border: 3px solid #edece9;
+		width: 6px;
+		cursor: pointer;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--wl-accent-color);
+	}
+}
+
+.calorie-modal_content {
+	max-width: 800px;
+
+	background-color: white;
+	border-radius: rem(10);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+	width: 100%;	
+	box-sizing: border-box;
+	animation: fadeUp 0.3s ease-out;
+
+	overflow: hidden;	
+}
+
+.calorie-modal_header {
+	position: relative;
+	text-align: center;
+	min-height: rem(40);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+}
+
+.calorie-modal_body {
+	max-height: 65vh;
+	overflow-y: auto;
+	padding-inline: rem(15);
+	padding-block: rem(15);
+	background-color: rgb(248, 248, 248);
+
+	font-family: "MuseOsans", sans-serif;	
+}
+
+.calorie-modal_footer {
+	padding: 5px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.calorie-close_header {
+	all: unset;
+	position: absolute;
+	right: 10px;
+	height: 100%;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	cursor: pointer;
+}
+
+.calorie-close_header:hover {
+	color: #333;
+}
+
+// Modal close button
+.calorie-close_footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+	padding: 0 16px;
+	border: none;
+	border-radius: 4px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 1.2;
+	letter-spacing: 0.02em;
+	text-align: center;
+	white-space: nowrap;
+	cursor: pointer;
+
+	background: rgb(255, 222, 0);
+	color: black;
+}
+
+/* Анимация появления модала */
+@keyframes fadeUp {
+	from {
+		opacity: 0;		
+	}
+	to {
+		opacity: 1;		
+	}
+}

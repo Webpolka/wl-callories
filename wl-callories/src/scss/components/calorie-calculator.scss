@@ -1,0 +1,331 @@
+/*-------------------------------------------------------------------------------------------------------------------------
+CALLORIE CALCULATOR
+--------------------------------------------------------------------------------------------------------------------------*/
+.calorie-calculator {
+	--font-main: "Roboto", sans-serif;
+	--font-title: "Roboto", sans-serif;
+
+	--accent: rgb(76, 175, 80);
+	--bg: rgb(249, 246, 231);
+
+	--scrollbar: gray;
+	--scrollbar-track: gray;
+	--scrollbar-thumb: var(--accent);
+
+	min-inline-size: 280px;
+	max-inline-size: 1280px;
+
+	font-family: var(--font-main);
+	margin-inline: auto;
+
+	/* ------------------------------------------------------------------------------------------------------------------------------
+RESET
+--------------------------------------------------------------------------------------------------------------------------------*/
+	* {
+		margin: 0;
+		border: 0;
+		padding: 0;
+		-webkit-tap-highlight-color: transparent;
+
+		&,
+		&::before,
+		&::after {
+			box-sizing: border-box;
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+	}
+
+	nav,
+	footer,
+	header,
+	aside {
+		display: block;
+	}
+
+	html,
+	body {
+		inline-size: 100%;
+		block-size: 100%;
+	}
+
+	body {
+		overscroll-behavior: none;
+		text-rendering: optimizelegibility;
+		text-size-adjust: 100%;
+		font-size: rem(16);
+		font-weight: 400;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	input,
+	button,
+	textarea {
+		font-family: inherit;
+	}
+
+	input::-ms-clear {
+		display: none;
+	}
+
+	input[type="number"] {
+		appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none;
+		}
+	}
+
+	button {
+		cursor: pointer;
+		user-select: none;
+		background-color: transparent;
+
+		&::-moz-focus-inner {
+			border: 0;
+			padding: 0;
+		}
+	}
+
+	a {
+		user-select: none;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+
+		&:visited {
+			text-decoration: none;
+		}
+	}
+
+	ul,
+	li {
+		list-style: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: inherit;
+		font-weight: 400;
+	}
+
+	sup {
+		color: inherit;
+	}
+
+	/* ------------------------------------------------------------------------------------------------------------------------------
+MAIN STYLES
+--------------------------------------------------------------------------------------------------------------------------------*/
+	h2.calorie-calculator-title {
+		font-family: inherit;
+		font-weight: 100;
+		font-size: rem(32);
+		line-height: 120%;
+
+		margin-bottom: rem(25);
+		@include md {
+			font-size: rem(28);
+		}
+		@media (max-width: 440px) {
+			font-size: rem(24);
+			margin-bottom: rem(20);
+		}
+	}
+
+	&-container {
+		padding: rem(40);
+
+		background-color: var(--bg);
+		border: 3px solid #ede9d3;
+
+		@media (max-width: 440px) {
+			padding: rem(20) rem(15);
+		}
+	}
+	&-form {
+		& > p {
+			font-weight: 100;
+			font-style: italic;
+			font-size: rem(16);
+
+			color: rgb(68, 68, 68);
+
+			padding: initial;
+			margin: initial;
+
+			margin-bottom: rem(40);
+			@include md {
+				margin-bottom: rem(20);
+			}
+		}
+
+		.form-group {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			gap: rem(20);
+
+			@media (max-width: 440px) {
+				grid-template-columns: 1fr;
+				grid-template-rows: 1fr;
+				gap: rem(5);
+			}
+
+			align-items: center;
+
+			margin-bottom: rem(20);
+
+			p.calorie-strong,
+			label {
+				font-size: rem(16);
+				font-weight: 700;
+				line-height: 150%;
+
+				padding: initial;
+				margin: initial;
+
+				color: rgb(67, 73, 76);
+
+				@media (max-width: 440px) {
+					font-size: rem(14);
+				}
+			}
+
+			input,
+			select {
+				padding: initial;
+				margin: initial;
+
+				padding: rem(5) rem(10);
+				font-size: rem(16);
+				line-height: 1.5;
+				color: #222;
+				background-color: #fff;
+				-webkit-background-clip: padding-box;
+				background-clip: padding-box;
+				transition: border-color 0.15s ease-in-out;
+			}
+			input[type="number"] {
+				width: 50%;
+				&:focus {
+					outline: 1px solid blue;
+				}
+
+				@include md {
+					width: 100%;
+				}
+			}
+			select {
+				width: 100%;
+				&:focus {
+					outline: 1px solid orange;
+				}
+
+				@media (max-width: 440px) {
+					font-size: rem(14);
+				}
+			}
+		}
+		.form-actions {
+			display: inline-flex;
+			flex-direction: row;
+			gap: rem(20);
+
+			padding-top: rem(10);
+
+			button,
+			input[type="button"],
+			input[type="submit"] {
+				display: inline-block;
+				background: var(--wl-accent-color);
+				border: solid 1px #688586;
+				border-radius: 3px;
+
+				font-size: rem(14);
+				font-weight: 700;
+				line-height: 100%;
+
+				min-height: rem(34);
+				padding-inline: rem(10);
+
+				cursor: pointer;
+
+				transition: all 0.3s ease-in-out;
+				&:hover {
+					opacity: 0.85;
+				}
+			}
+		}
+
+		.gender-options,
+		.goal-options {
+			display: inline-flex;
+			flex-direction: column;
+			gap: rem(5);
+		}
+	}
+
+	// RESULST CONTAINER
+	.calculation-result-inner {
+		display: flex;
+		flex-direction: column;
+		gap: rem(20);
+		color: rgb(68, 68, 68);
+
+		padding-top: rem(50);
+		padding-bottom: rem(20);
+
+		@media (max-width: 440px) {
+			gap: rem(15);
+		}
+
+		h3 {
+			padding: initial;
+			margin: initial;
+
+			font-size: rem(15);
+			font-weight: 700;
+			line-height: 120%;
+
+			@media (max-width: 440px) {
+				font-size: rem(14);
+			}
+		}
+		ul {
+			margin-bottom: rem(15);
+		}
+		p,
+		li {
+			padding: initial;
+			margin: initial;
+			margin-bottom: rem(10);
+
+			font-size: rem(15);
+			font-weight: 400;
+			line-height: 120%;
+
+			@media (max-width: 440px) {
+				font-size: rem(14);
+			}
+		}
+	}
+}

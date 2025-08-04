@@ -1,0 +1,51 @@
+/*-------------------------------------------------------------------------------------------------------------------------
+MODAL CALCULATOR CONTENT STYLES
+--------------------------------------------------------------------------------------------------------------------------*/
+.calorie-modal_content {
+    // RESULST CONTAINER
+	.calculation-result-inner {
+		display: flex;
+		flex-direction: column;
+		gap: rem(20);
+		color: rgb(68, 68, 68);
+
+		padding-top: rem(15);
+		padding-bottom: rem(15);
+
+		@media (max-width: 440px) {
+			gap: rem(15);
+		}
+
+		h2,h3,h4 {
+			padding: initial;
+			margin: initial;
+	
+
+            font-family: "OpenSans",sans-serif;
+			font-size: rem(18);
+			font-weight: 700;
+			line-height: 120%;
+
+			@media (max-width: 440px) {
+				font-size: rem(16);
+			}
+		}
+		ul {
+			margin-bottom: rem(15);
+		}
+		p,
+		li {
+			padding: initial;
+			margin: initial;
+			margin-bottom: rem(10);
+
+			font-size: rem(15);
+			font-weight: 400;
+			line-height: 120%;
+
+			@media (max-width: 440px) {
+				font-size: rem(14);
+			}
+		}
+	}
+}

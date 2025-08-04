@@ -6,6 +6,7 @@ Version: 1.0
 Author: WebLegko
 */
 
+
 function add_callories_menu()
 {
     add_menu_page(
@@ -16,7 +17,7 @@ function add_callories_menu()
         'callories_page_callback',   // callback — не выводит ничего
         'dashicons-food', // Иконка
         6               // Позиция
-    );
+    );   
 
     // Добавляем подменю "Салаты" 
     add_submenu_page(
@@ -36,8 +37,16 @@ function add_callories_menu()
         'edit.php?post_type=garniry'
     );
 
+     // Хук для обработки сохранения настроек
+    add_action('admin_init', 'register_my_settings');
+
 }
 add_action('admin_menu', 'add_callories_menu');
+
+function register_my_settings() {
+    // Регистрируем опцию
+    register_setting('my_settings_group', 'wl_checkbox_option');  
+}
 
 
 // Регистрация типов записей при инициализации
@@ -87,18 +96,48 @@ function create_custom_post_types()
 }
 add_action('init', 'create_custom_post_types');
 
+
 function callories_page_callback()
 {
-    echo '<h2>Рекомендаци по использованию слайдера WL-Callories-Slider !</h2>';
+    echo '<h2>Как использовать слайдер WL-Callories-Slider ?</h2>';
     echo '<p>1. Загрузите изображения салатов и гарниров, и заполните входные данные в соответствующих разделах.</p>';
+    echo '<p>Изображения могут быть любых размеров но пропорция должна быть 1/2 (рекомендовано: ширина - 750 / высота - 1500), формата webp </p>';            
     echo '<p>2. Вставьте шорткод в нужном месте страницы или записи:</p>';
     echo '<strong style="display:block;">[wl-callories-slider]</strong>';
+    echo '<p>если хотите поменять заголовок, стили заголовка, максимальную ширины(max_width) слайдера, цвет бегунка(color_accent) в модальном окне или кол-во изображений(initial_img) для подгрузки воспользуйтесь атрибутами:</p>';        
+    echo '<strong style="display:block;">ПРИМЕР: [wl-callories-slider max_width="1000" title="Ваш новый заголовок" title_class="your-title-class" initial_img="2" color_accent="orange"]';
+    echo '<p>для возможности перехода на страницу блюда при клике, скопируйте из папки templates плагина стартовые шаблоны <b>single-garniry.php</b> и <b>single-salaty.php</b> в корень вашей темы.</p>';            
     echo '<br>';
-    echo '<h2>Как вставить калькулятор WL-Callories-Calculator ?</h2>';
+    echo '<h2>Как использовать WL-Callories-Calculator ?</h2>';
     echo '<p>Просто разместите этот шорткод в нужном месте страницы или записи:</p>';
     echo '<strong style="display:block;">[wl-callories-calculator]</strong>';
-    echo '<p>если хотите поменять заголовок, стили заголовка воспользуйтесь атрибутами:</p>';
-    echo '<strong style="display:block;">[wl-callories-calculator title="Ваш новый заголовок" title_class="your-title-class"]</strong>';
+    echo '<p>если хотите поменять заголовок, стили заголовка или цвет кнопки и бегунка(color_accent) воспользуйтесь атрибутами:</p>'; 
+    echo '<strong style="display:block;">ПРИМЕР: [wl-callories-calculator title="Ваш новый заголовок" title_class="your-title-class" color_accent="orange"]</strong>';
+    echo '<br>';
+    echo '<h2>ОБЩАЯ РЕКОМЕНДАЦИЯ ! Не вствляйте сразу два одинаковых элемента на одной странице. Скрипт обработает только первые.</h2>';
+    echo '<br>';
+    echo '<br>';
+    ?><div class="wrap">
+        <h2>Настройки</h2>
+        <form method="post" action="options.php">
+            <?php settings_fields('my_settings_group'); ?>
+            <?php do_settings_sections('my_settings_group'); ?>
+
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">ВЫВОДИТЬ ВСЁ В МОДАЛКУ: </th>
+                    <td>
+                        <input type="checkbox" name="wl_checkbox_option" value="1" <?php checked(1, get_option('wl_checkbox_option'), true); ?> />
+                    </td>                    
+                </tr>
+            </table>
+            
+            <?php submit_button(); ?>
+        </form>  
+    </div>
+    <?php
+      // Подключаем скрипты и стили
+    add_action('admin_enqueue_scripts', 'enqueue_color_picker_assets');
 }
 
 // Добавляем мета-боксы для каждого типа записи
@@ -115,6 +154,38 @@ add_action('add_meta_boxes', function () {
         );
     }
 });
+
+// Создание пользовательского размера изображения с пропорциями 1:2
+add_image_size('custom-size-1-2', 600, 1200, true); // или false для жесткой обрезки
+
+function get_url_image_for_slider($post_id, $size = 'thumbnail')
+{
+    // Получить тип поста
+    $post_type = get_post_type($post_id);
+
+    // Проверка типа
+    if (in_array($post_type, array('garniry', 'salaty'))) {
+        // Использовать нужный размер
+        $size = 'custom-size-1-2';
+    }
+
+    // Получить миниатюру
+    if (has_post_thumbnail($post_id)) {
+        return get_the_post_thumbnail_url($post_id, $size);
+    }
+    return '';
+}
+
+function add_custom_thumbnail_message($content, $post_id)
+{
+    $post_type = get_post_type($post_id);
+    if (in_array($post_type, array('garniry', 'salaty'))) {
+        $message = '<p style="color: #555; font-size: 18px; text-transform: uppercase;"><span style="color: red">Внимание !</span><br/>пропорции 1:2 обязательны</p>';
+        return $content . $message;
+    }
+    return $content;
+}
+add_filter('admin_post_thumbnail_html', 'add_custom_thumbnail_message', 10, 2);
 
 // Колбэк для отображения полей
 function render_nutrition_fields($post)
@@ -192,14 +263,13 @@ add_action('save_post', function ($post_id) {
 });
 
 
-
 // Подключаем скрипты и стили Callories
 function wl_callories_enqueue_scripts()
 {
     // Регистрация и подключение CSS
     wp_enqueue_style(
         'wl-callories-slider-styles', // уникальный хэндл
-        plugins_url('wl-callories/postcss/main.min.css', __FILE__), // путь к файлу стилей
+        plugins_url('wl-callories/dist/wl-callories/postcss/main.min.css', __FILE__), // путь к файлу стилей
         array(), // зависимости
         '1.0', // версия
         'all' // медиа
@@ -208,11 +278,17 @@ function wl_callories_enqueue_scripts()
     // Регистрация и подключение JS
     wp_enqueue_script(
         'wl-callories-slider-scripts', // уникальный хэндл
-        plugins_url('wl-callories/js/main.min.js', __FILE__), // путь к файлу скрипта
+        plugins_url('wl-callories/dist/wl-callories/js/main.min.js', __FILE__), // путь к файлу скрипта
         array('jquery'), // зависимости
         '1.0', // версия
         true // в футере
     );
+    
+    wp_localize_script('wl-callories-slider-scripts', 'MyAjax', array(
+        'ajaxurl' => admin_url('admin-ajax.php')
+    ));
+
+
 }
 add_action('wp_enqueue_scripts', 'wl_callories_enqueue_scripts');
 
@@ -222,12 +298,15 @@ function wl_callories_calculator_shortcode($atts)
 {
     ob_start();
 
+    $checkbox_value = get_option('wl_checkbox_option');
+
     $atts = shortcode_atts(array(
         'title' => 'Калькулятор калорий для похудения',
-        'title_class' => 'calorie-calculator-title'
+        'title_class' => 'calorie-calculator-title',
+        'color_accent' => 'rgb(76, 175, 80)',
     ), $atts, 'wl-callories-calculator'); ?>
 
-    <section class="calorie-calculator">
+    <section id="calorie-calculator" class="calorie-calculator" <?php echo $atts['color_accent'] ? 'style="--wl-accent-color: ' . htmlspecialchars($atts['color_accent'] ) . ';"' : ''; ?>>
         <h2 class="<?php echo $atts['title_class']; ?>"><?php echo $atts['title']; ?></h2>
         <div class="calorie-calculator-container">
             <form class="calorie-calculator-form" method="post" id="calorieForm">
@@ -287,9 +366,15 @@ function wl_callories_calculator_shortcode($atts)
                     </div>
                 </div>
 
-                <div class="form-actions">
-                    <button type="submit">Рассчитать</button>
-                    <button type="reset">Сбросить</button>
+                  <div class="form-actions">
+                <?php if ($checkbox_value) { ?>
+                    <button type="submit" data-modal="true">Рассчитать</button>
+                    <button type="reset" data-modal="true">Сбросить</button>
+                <?php } else { ?>  
+                    <button type="submit" data-modal="false">Рассчитать</button>
+                    <button type="reset" data-modal="false">Сбросить</button>
+                <?php }; ?>                      
+                    
                 </div>
             </form>
 
@@ -313,9 +398,14 @@ function wl_callories_slider_shortcode($atts)
         'title' => 'Тарелки по Методу тарелки',
         'title_class' => '',
         'max_width' => '445',
-    ), $atts, 'wl-callories-slider'); ?>
-
-    <section class="calorie-slider" style="max-inline-size:<?php echo $atts['max_width']; ?>px" id="calorie-slider" itemscope itemtype="https://schema.org/WebPage">
+        'color_accent' => 'rgb(76, 175, 80)',        
+        'initial_img' => 1        
+    ), $atts, 'wl-callories-slider'); 
+        
+   $checkbox_value = get_option('wl_checkbox_option');
+    ?>      
+    
+    <section class="calorie-slider" <?php echo $atts['color_accent'] ? 'style="--wl-accent-color: ' . htmlspecialchars($atts['color_accent'] ) . '; max-inline-size:'. $atts['max_width'].'px;"' : 'style="max-inline-size:'. $atts['max_width'].'px;"'; ?> id="calorie-slider" itemscope itemtype="https://schema.org/WebPage">
         <header>
            <h2 class="calorie-slider-title " itemprop="headline" class="<?php echo $atts['title_class']; ?>"><?php echo $atts['title']; ?></h2>
             <p>
@@ -332,7 +422,7 @@ function wl_callories_slider_shortcode($atts)
             <!-- ЛЕВАЯ СТОРОНА -->
             <div class="calorie-slider_col" itemscope itemtype="https://schema.org/ItemList">
                 <!-- Слайдер гарниров -->
-                <div class="swiper" id="garnirs-swiper" itemprop="itemList">
+                <div class="swiper" id="garnirs-swiper" data-initial="<?php echo $atts['initial_img']; ?>" itemprop="itemList">
                     <div class="swiper-button-prev" aria-label="Предыдущий слайд" role="button" aria-disabled="false">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -376,18 +466,39 @@ function wl_callories_slider_shortcode($atts)
                                     itemtype="https://schema.org/ListItem">
                                     <meta itemprop="position" content="<?php echo $i;?>">
                                     <article itemscope itemtype="https://schema.org/Product">
-                                        <a href="<?php the_permalink();?>" class="calorie-card" itemprop="url" itemscope
+                                    
+                                    <?php if ($checkbox_value) { ?>
+                                            <div class="calorie-card wl-open-modal" data-postid="<?php echo get_the_ID(); ?>" itemscope
                                             itemtype="https://schema.org/Thing" data-title="<?php the_title();?>"
-                                            data-p="<?php echo $gProtein;?>" data-f="<?php echo $gFats;?>" data-c="<?php echo $gCarbo;?>"
+                                              data-p="<?php echo $gProtein;?>" data-f="<?php echo $gFats;?>" data-c="<?php echo $gCarbo;?>"
                                             data-kkal="<?php echo $gKkal;?>" data-serving="<?php echo $gServing;?>">
+
+                                            <?php } else { ?>  
+
+                                            <a href="<?php the_permalink();?>" class="calorie-card" itemprop="url" itemscope
+                                            itemtype="https://schema.org/Thing" data-title="<?php the_title();?>"
+                                              data-p="<?php echo $gProtein;?>" data-f="<?php echo $gFats;?>" data-c="<?php echo $gCarbo;?>"
+                                            data-kkal="<?php echo $gKkal;?>" data-serving="<?php echo $gServing;?>">
+
+                                        <?php }; ?>                                       
+                                          
                                             <figure class="calorie-card_image" itemprop="image" itemscope
                                                 itemtype="https://schema.org/ImageObject">
-                                                <img src="<?php the_post_thumbnail_url();?>" alt="<?php the_title();?>"
-                                                    itemprop="url">
-                                            </figure>
+                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo get_template_directory_uri();?>/images/1x1.png" 
+                                                    aria-hidden="true">
+                                            </figure>                                            
                                             <meta itemprop="name" content="<?php the_title();?>">
-                                        </a>
+                                       
+                                        <?php  if ($checkbox_value) { ?>
+                                        </div>
+                                            <?php } else { ?>  
+                                            </a>   
+                                        <?php }; ?>  
+
                                     </article>
+                                    <span class="calorie-preloader">
+                                        <span class="calorie-preloader_body"></span>
+                                    </span>
                                 </div>
                                 <?php
                                 $i++;
@@ -421,7 +532,7 @@ function wl_callories_slider_shortcode($atts)
             <!-- ПРАВАЯ СТОРОНА -->
             <div class="calorie-slider_col" itemscope itemtype="https://schema.org/ItemList">
                 <!-- Слайдер салатов -->
-                <div class="swiper" id="salads-swiper" itemprop="itemList">
+                <div class="swiper" id="salads-swiper" data-initial="<?php echo $atts['initial_img']; ?>" itemprop="itemList">
                     <div class="swiper-button-prev" aria-label="Предыдущий слайд" role="button" aria-disabled="false">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -463,20 +574,39 @@ function wl_callories_slider_shortcode($atts)
                                 ?>
                                 <div class="swiper-slide" itemprop="itemListElement" itemscope
                                     itemtype="https://schema.org/ListItem">
-                                    <meta itemprop="position" content="<?php echo $j;?>">
+                                    <meta itemprop="position" content="<?php echo $j;?>">                                     
                                     <article itemscope itemtype="https://schema.org/Product">
-                                        <a href="<?php the_permalink();?>" class="calorie-card" itemprop="url" itemscope
+                                          <?php if ($checkbox_value) { ?>
+                                            <div class="calorie-card wl-open-modal" data-postid="<?php echo get_the_ID(); ?>" itemscope 
                                             itemtype="https://schema.org/Thing" data-title="<?php the_title();?>"
-                                            data-p="<?php echo $sProtein;?>" data-f="<?php echo $sFats;?>" data-c="<?php echo $sCarbo;?>"
+                                              data-p="<?php echo $sProtein;?>" data-f="<?php echo $sFats;?>" data-c="<?php echo $sCarbo;?>"
                                             data-kkal="<?php echo $sKkal;?>" data-serving="<?php echo $sServing;?>">
+
+                                            <?php } else { ?>  
+
+                                            <a href="<?php the_permalink();?>" class="calorie-card" itemprop="url" itemscope
+                                            itemtype="https://schema.org/Thing" data-title="<?php the_title();?>"
+                                              data-p="<?php echo $sProtein;?>" data-f="<?php echo $sFats;?>" data-c="<?php echo $sCarbo;?>"
+                                            data-kkal="<?php echo $sKkal;?>" data-serving="<?php echo $sServing;?>">
+
+                                        <?php }; ?>                                       
+                                          
                                             <figure class="calorie-card_image" itemprop="image" itemscope
                                                 itemtype="https://schema.org/ImageObject">
-                                                <img src="<?php the_post_thumbnail_url();?>" alt="<?php the_title();?>"
-                                                    itemprop="url">
-                                            </figure>
+                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo get_template_directory_uri();?>/images/1x1.png" 
+                                                    aria-hidden="true">
+                                            </figure>                                            
                                             <meta itemprop="name" content="<?php the_title();?>">
-                                        </a>
+                                       
+                                        <?php  if ($checkbox_value) { ?>
+                                        </div>
+                                            <?php } else { ?>  
+                                            </a>   
+                                        <?php }; ?>  
                                     </article>
+                                    <span class="calorie-preloader">
+                                        <span class="calorie-preloader_body"></span>
+                                    </span>
                                 </div>
                                 <?php
                                 $j++;
@@ -506,8 +636,102 @@ function wl_callories_slider_shortcode($atts)
                 </div>
             </div>
         </div>
-    </section>';
-
+    </section>    
 <?php return ob_get_clean(); }
 //Зарегистрируем шорткод с тегом [wl-callories-slider]
 add_shortcode('wl-callories-slider', 'wl_callories_slider_shortcode');
+
+
+
+// Вывод все дополнимтельных полей пользовательского типа записи
+add_action('wp_ajax_get_custom_fields', 'get_custom_fields_callback');
+add_action('wp_ajax_nopriv_get_custom_fields', 'get_custom_fields_callback');
+function get_custom_fields_callback() {
+    $post_id = intval($_POST['post_id']);
+
+    // Получаем все мета поля
+
+    $title = get_the_title($post_id);
+    $thumbnail_url = get_the_post_thumbnail_url($post_id, 'small'); // Можно указать размер, например 'thumbnail', 'medium', 'large', или 'full'
+    
+    $calories = get_post_meta($post_id, '_calories', true);     
+    
+    $protein = get_post_meta($post_id, '_protein', true);
+    $fat = get_post_meta($post_id, '_fat', true);
+    $carbohydrates = get_post_meta($post_id, '_carbohydrates', true);
+   
+    $mass = get_post_meta($post_id, '_mass_serving', true);
+
+    $ingredients = get_post_meta($post_id, '_ingredients', true);
+    $recipe = get_post_meta($post_id, '_recipe', true);
+    
+    $meta = get_post_meta($post_id);
+    
+    if (empty($meta)) {
+        echo 'У этого поста нет данных.';
+        wp_die();
+    }?>
+    
+    <section class="calorie-slider-modalContent" id="calorie-slider-modalContent" itemscope itemtype="https://schema.org/WebPage">
+	<h2 class="visually-hidden"><?php echo $title;?></h2>
+	<article class="calorie-slider-modalContent-article">	
+        <?php 
+        $justify = '';
+        $post_type = get_post_type($post_id);
+        if($post_type == 'garniry'){$justify='garniry';}
+        if($post_type == 'salaty'){$justify='salaty';}
+        ?>
+
+        <div class="calorie-slider-modalContent_grid">
+    		<div class="calorie-slider-modalContent_image <?php echo $justify;?>"> <!-- ПРАВО ЛЕВО (salad, garnir) -->
+	    		<img src="<?php echo $thumbnail_url;?>" alt="<?php echo $title;?>" aria-hidden="true"/>
+	    	</div>
+
+		    <div class ="calorie-slider-modalContent_header">
+		    	<span class="calorie-slider-modalContent_title"><?php echo $title;?></span>
+
+                <div class="calorie-slider-modalContent_nutrients">
+		        	<strong>на 100 г:</strong>
+		        	<p><?php echo $calories;?> ккал</p>
+			        <p>Белок: <?php echo $protein;?> г</p>
+			        <p>Жиры: <?php echo $fat;?> г</p>
+			        <p>Углеводы: <?php echo $carbohydrates;?> г</p>                 
+		        </div>
+
+                <div class="calorie-slider-modalContent_serving">
+			        <span>*размер порции <?php echo $mass;?> г</span>
+		        </div>
+		    </div>		
+        </div>		
+
+		<div class="calorie-slider-modalContent_content">
+			<h3>Состав / ингредиенты</h3>
+			<?php echo text_to_ul($ingredients);?>
+			<h3>Рецепт</h3>
+			<p>
+                <?php echo $recipe;?>
+            </p>
+		</div>
+	</article>
+    </section>
+    
+
+    <?php wp_die();
+}
+
+// Преобразовуем в список ul li
+function text_to_ul( $text ) {
+    // Разбиваем текст по переносам строк
+    $lines = preg_split('/\r\n|\r|\n/', $text);
+    
+    // Удаляем пустые строки
+    $lines = array_filter( $lines, 'trim' );
+    
+    // Оборачиваем каждую строку в <li>
+    $list_items = array_map( function( $line ) {
+        return '<li>' . esc_html( trim( $line ) ) . '</li>';
+    }, $lines );
+    
+    // Объединяем в список
+    return '<ul>' . implode( '', $list_items ) . '</ul>';
+}

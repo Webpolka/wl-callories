@@ -261,11 +261,23 @@ document.addEventListener("DOMContentLoaded", () => {
 		return value.trim() || null;
 	}
 
-	const accentCalc = getCSSVariableValue(document.querySelector("#calorie-calculator"), "--wl-accent-color");
-	const accentSlider = getCSSVariableValue(document.querySelector("#calorie-slider"), "--wl-accent-color");
-	const accentColor = accentCalc || accentSlider;
+	const callorCalculator = document.querySelector("#calorie-calculator");
+	const callorSlider = document.querySelector("#calorie-slider");
+	let accentCalc;
+	let accentSlider;
+	let accentColor;
 
-	document.querySelector("#myModal").setAttribute("style", `--wl-accent-color:${accentColor};`);
+	if (callorCalculator) {
+		accentCalc = getCSSVariableValue(document.querySelector("#calorie-calculator"), "--wl-accent-color");
+	}
+	if (callorSlider) {
+		accentSlider = getCSSVariableValue(document.querySelector("#calorie-slider"), "--wl-accent-color");
+	}
+	accentColor = accentCalc || accentSlider;
+
+	if (accentColor) {
+		document.querySelector("#myModal").setAttribute("style", `--wl-accent-color:${accentColor};`);
+	}
 });
 
 // Обработка модалки
@@ -315,7 +327,11 @@ jQuery(document).ready(function ($) {
 
 	const form = document.getElementById("calorieForm");
 	const resultDiv = document.getElementById("calorie-results");
-	const modalTrue = form.querySelector('button[data-modal="true"]');
+	let modalTrue;
+
+	if (form) {
+		modalTrue = form.querySelector('button[data-modal="true"]');
+	}
 
 	if (form && resultDiv) {
 		form.addEventListener("submit", (event) => {

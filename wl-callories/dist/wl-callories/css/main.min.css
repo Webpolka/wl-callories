@@ -1441,6 +1441,11 @@ CALORIE SLIDER
 .calorie-slider .swiper-slide .calorie-preloader {
   z-index: 0;
 }
+.calorie-slider .swiper-button-prev,
+.calorie-slider .swiper-button-next {
+  margin: 0 !important;
+  background-image: none !important;
+}
 .calorie-slider .swiper-button-prev::after,
 .calorie-slider .swiper-button-next::after {
   content: "";
@@ -1524,8 +1529,8 @@ CALORIE SLIDER
   cursor: pointer;
 }
 .calorie-slider .calorie-card_image {
-  height: auto;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 .calorie-slider .calorie-card_image img {
   display: block;

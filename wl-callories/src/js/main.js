@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			direction: "vertical",
 			autoHeight: true,
 			spaceBetween: 3,
+			slidesPerView: 1,
 
 			// Navigation arrows
 			navigation: {
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			autoHeight: true,
 			loop: true,
 			spaceBetween: 3,
+			slidesPerView: 1,
 
 			// Navigation arrows
 			navigation: {

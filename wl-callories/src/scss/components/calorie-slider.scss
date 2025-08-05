@@ -35,11 +35,11 @@ CALORIE SLIDER RESET
 		}
 	}
 
-	.calorie-preloader{	
+	.calorie-preloader {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);		
+		transform: translate(-50%, -50%);
 	}
 	.calorie-preloader_body {
 		display: block;
@@ -175,25 +175,31 @@ CALORIE SLIDER RESET
 	/* -----------------------------------------------------------------------------------------------------------------------------
 	SWIPER EXTRA STYLES
 --------------------------------------------------------------------------------------------------------------------------------*/
-	.swiper {
+	.swiper {		
 		position: relative;
-		aspect-ratio: 117/235;
+		 aspect-ratio: 117/235;
 		overflow: hidden;
+		// height: 200px;
 	}
 
-	.swiper-wrapper{
+	.swiper-wrapper {
 		z-index: inherit !important;
 	}
 	.swiper-slide {
-		transition: all 0.3s ease;
+		transition: all 0.3s ease;		
 
-		article{
+		article {
 			position: relative;
-			z-index: 1;			
+			z-index: 1;
 		}
-		.calorie-preloader{	
+		.calorie-preloader {
 			z-index: 0;
 		}
+	}
+	.swiper-button-prev,
+	.swiper-button-next {
+		margin: 0 !important;
+		background-image: none !important;
 	}
 
 	.swiper-button-prev::after,
@@ -288,12 +294,12 @@ CALORIE SLIDER STYLES
 	}
 
 	.calorie-card {
-		display: block;	
+		display: block;
 		cursor: pointer;
 
 		&_image {
-			height: auto;
-			width: auto;
+			height: 100%;
+			width: 100%;
 			img {
 				display: block;
 				width: 100%;

@@ -484,7 +484,7 @@ function wl_callories_slider_shortcode($atts)
                                           
                                             <figure class="calorie-card_image" itemprop="image" itemscope
                                                 itemtype="https://schema.org/ImageObject">
-                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo get_template_directory_uri();?>/images/1x1.png" 
+                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo plugin_dir_url(__FILE__);?>wl-callories/dist/wl-callories/images/i1x2.webp" 
                                                     aria-hidden="true">
                                             </figure>                                            
                                             <meta itemprop="name" content="<?php the_title();?>">
@@ -593,8 +593,8 @@ function wl_callories_slider_shortcode($atts)
                                           
                                             <figure class="calorie-card_image" itemprop="image" itemscope
                                                 itemtype="https://schema.org/ImageObject">
-                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo get_template_directory_uri();?>/images/1x1.png" 
-                                                    aria-hidden="true">
+                                                <img data-src="<?php echo get_url_image_for_slider(get_the_ID());?>" data-updated="false" src="<?php echo plugin_dir_url(__FILE__);?>wl-callories/dist/wl-callories/images/i1x2.webp" 
+                                                    aria-hidden="true">                                                                                      
                                             </figure>                                            
                                             <meta itemprop="name" content="<?php the_title();?>">
                                        
